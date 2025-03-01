@@ -1,29 +1,20 @@
 name: Run Tetris Game
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+on: [push, pull_request]
 
 jobs:
-  run-tetris:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.x"
-
-      - name: Install Dependencies
-        run: |
-          pip install -r requirements.txt || echo "No requirements file found"
-
-      - name: Run Tetris Script
-        run: python Tetris.py
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.13'
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+    - name: Run Tetris Game
+      run: |
+        python Tetris.py
